@@ -1,3 +1,16 @@
-from django.contrib import admin
+"""Register the Models in the admin site"""
 
-# Register your models here.
+from django.contrib import admin
+from .models import Category, Product
+
+class CategoryAdmin(admin.ModelAdmin):
+	list_display = ['name', 'slug']
+	prepopulated_fields = {'slug': ('name',)}
+admin.site.register(Category, CategoryAdmin)
+
+class ProductAdmin(admin.ModelAdmin):
+	list_display = ['name', 'slug', 'price', 'created', 'updated']
+	list_filter = ['created', 'updated']
+	list_editable = ['price']
+	prepopulated_fields = {'slug': ('name',)}
+admin.site.register(Product, ProductAdmin)
