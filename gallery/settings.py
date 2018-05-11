@@ -25,6 +25,8 @@ SECRET_KEY = '#7csdb#zebu%r%a%e(xwe_hse63&lsu+%rkvg&+3ukd%@gslc1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+THUMBNAIL_DEBUG = True
+
 ALLOWED_HOSTS = []
 
 
@@ -37,8 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #my applications
-    'shop'
+    # my app
+    'shop',
+    'cart',
+    'orders',
+
+    # installed apps
+    'sorl.thumbnail'
+
 ]
 
 MIDDLEWARE = [
@@ -64,6 +72,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_processors.cart',
             ],
         },
     },
@@ -115,11 +124,13 @@ USE_L10N = True
 
 USE_TZ = True
 
+CART_SESSION_ID = 'cart'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')

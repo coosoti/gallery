@@ -1,5 +1,6 @@
 {% extends "shop/layout.html" %}
 {% load static %}
+{% load thumbnail %}
 
 {% block title %}
 	{% if category %}{{ category.name }}{% else %}Products{% endif %}
@@ -24,7 +25,11 @@
 	{% for product in products %}
 	<div class="item">
 		<a href="{{ product.get_absolute_url }}">
-			<img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+			{% thumbnail product.image "10000" crop="10px 10px" as im %}
+				<img src="{{ product.image.url }}"> 
+			{% empty %}
+				<img src="{% static "img/no_image.png" %}">	
+			{% endthumbnail %} 
 		</a>
 		<a href="{{ product.get_absolute_url }}">{{ product.name }}</a><br>
 			KES {{ product.price }}
