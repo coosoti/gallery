@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>{% block title %}KNA | Online Gallery{% endblock %}</title>
+        <!-- Latest compiled and minified CSS -->
+        <link href="{% static "css/base.css" %}" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="text-center">
+                <h1><a href="/" class="brand lead"><strong>KNA Online Gallery</strong></a></h1>
+            </div>
+            <div id="subheader">
+                <div class="alert alert-info text-right" role="alert">
+                    {% with total_items=cart|length %}
+                        {% if cart|length > 0 %}
+                            Your cart:
+                            <a href="{% url "cart:cart_detail" %}">
+                            {{ total_items }} item{{ total_items|pluralize }},
+                            KES {{ cart.get_total_price }}
+                            </a>
+                        {% else %}
+                            Your cart is empty.</span>
+                        {% endif %}
+                    {% endwith %} 
+                </div>
+            </div>
+            <div id="content">
+            {% block content %}
+
+            {% endblock %}
+            </div>
+            <!-- Latest compiled and minified JavaScript -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        </div>
+    </body>
+</html>

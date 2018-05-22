@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'orders',
 
     # installed apps
-    'sorl.thumbnail'
+    'sorl.thumbnail',
+    'bootstrap3'
 
 ]
 

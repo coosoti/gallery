@@ -1,0 +1,69 @@
+{% extends "shop/layout_b.html" %}
+{% load static %}
+{% load thumbnail %}
+
+{% block title %}
+	{% if category %}{{ category.name }}{% else %}Products{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+	<div class="col-sm-3 sidebar">
+		<div class="mini-submenu">
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+		</div>
+		<ul class="list-group">
+			<span href="#" class="list-group-item">
+	            Categories
+	            <span class="pull-right" id="slide-submenu">
+	                <i class="fa fa-times"></i>
+	            </span>
+	        </span>
+	        <li class="list-group-item" {% if not category %}id="selected"{% endif %}>
+				<a href="{% url "shop:product_list" %}">All</a>
+			</li>
+			{% for c in categories %}
+				<li class="list-group-item" {% if category.slug == c.slug %}id="selected"{% endif %}>
+					<a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
+	<div id="main" class="col-sm-9 product-list">
+		<div class="panel panel-default">
+  			<div class="panel-body row">
+  				<div class="" style="padding-left: 15px;">
+					<h3 style="margin-top: -5px">{% if category %}{{ category.name }}{% else %}Products{% endif %}</h3>
+				</div>
+				{% for product in products %}
+				<div class="col-sm-4">
+			    	<div class="thumbnail">
+			    		<a href="{{ product.get_absolute_url }}">
+			      			{% thumbnail product.image "10000" crop="10px 10px" as im %}
+								<img src="{{ product.image.url }}" style="max-height: 150px;"> 
+							{% empty %}
+								<img src="{% static "img/no_image.png" %}">	
+							{% endthumbnail %} 
+			      		</a>	
+					    <div class="caption">
+					        <p><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></p>
+					        <p>KES {{ product.price }}</p>
+					        <p><a href="{{ product.get_absolute_url }}" class="btn btn-primary" role="button">View</a></p>
+					    </div>
+			    	</div>
+		  		</div>
+				{% endfor %}
+			</div>
+		</div>	
+	</div>
+</div>	
+{% endblock %}
+<div class="panel panel-default">
+  	<div class="panel-body">
+    Basic panel example
+  	</div>
+</div>
+
+  	

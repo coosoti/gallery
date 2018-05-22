@@ -14,10 +14,10 @@ def product_list(request, category_slug=None):
     context = {'category': category,
                'categories': categories,
                'products': products}
-    return render(request, 'shop/list.html', context)
+    return render(request, 'shop/list_b.html', context)
 
 def product_detail(request, id, slug):
     product = get_object_or_404(Product, id=id, slug=slug)
     cart_product_form = CartAddProductForm()
     context = {'product': product, 'cart_product_form': cart_product_form}
-    return render(request, 'shop/detail.html', context)
+    return render(request, 'shop/detail_b.html', context)
