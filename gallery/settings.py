@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = '#7csdb#zebu%r%a%e(xwe_hse63&lsu+%rkvg&+3ukd%@gslc1'
+SECRET_KEY = '#7csdb#zebu%r%a%e(xwe_hse63&lsu+%rkvg&+3ukd%@gslc1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
@@ -147,10 +147,17 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 
 # This is for environment setup
-SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG', default=False, cast=bool)
+
 DATABASES = {
-    'default': dj_database_url.config(
-        default=config('DATABASE_URL')
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'gallery',
+        'USER': 'postgres',
+        'PASSWORD': '28201903',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
 }
+
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
