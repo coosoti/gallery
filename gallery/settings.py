@@ -28,7 +28,7 @@ SECRET_KEY = '#7csdb#zebu%r%a%e(xwe_hse63&lsu+%rkvg&+3ukd%@gslc1'
 
 THUMBNAIL_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["demo-kna-gallery.herokuapp.com", "*"]
 
 
 # Application definition
